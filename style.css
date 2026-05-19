@@ -1,0 +1,707 @@
+/* ============================================
+   VARIABLES DE COULEURS
+   Toutes les couleurs bleues du CV
+============================================ */
+:root {
+  --s1: #084f72;    /* bleu très foncé */
+  --s2: #1878a8;    /* bleu moyen */
+  --s3: #3fa8d5;    /* bleu ciel */
+  --s4: #7dcbea;    /* bleu clair */
+  --s5: #bce5f5;    /* bleu très clair */
+  --s6: #e6f6fc;    /* bleu ultra pâle */
+  --s7: #f0faff;    /* presque blanc bleuté */
+  --white: #ffffff;
+  --ink: #071e2a;   /* texte très foncé */
+  --ink2: #1e4158;  /* texte foncé */
+  --muted: #5a7e96; /* texte gris bleu */
+  --border: #c0dded;/* couleur des bordures */
+}
+
+
+/* ============================================
+   RESET — supprime les marges par défaut
+============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ============================================
+   BODY — fond de la page
+============================================ */
+body {
+  background: linear-gradient(145deg, #c5e5f5 0%, #daeef8 50%, #bfe0f2 100%);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+
+/* ============================================
+   PAGE — la carte blanche principale
+============================================ */
+.page {
+  width: 100%;
+  max-width: 940px;
+  background: var(--white);
+  box-shadow:
+    0 0 0 1px rgba(8,79,114,.08),
+    0 24px 60px rgba(8,79,114,.14),
+    0 60px 120px rgba(8,79,114,.08);
+
+  /* Animation d'apparition */
+  opacity: 0;
+  transform: translateY(28px);
+  animation: pageIn 1s cubic-bezier(.16,1,.3,1) .1s forwards;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* ============================================
+   STRIPE — barre fine colorée tout en haut
+============================================ */
+.stripe {
+  height: 5px;
+  background: linear-gradient(90deg, var(--s1), var(--s3), var(--s4), var(--s5));
+}
+
+
+/* ============================================
+   HERO — zone du haut avec 3 colonnes
+============================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 200px 1fr 220px;
+  min-height: 230px;
+  border-bottom: 1px solid var(--border);
+}
+
+
+/* ── Colonne 1 du hero : Photo ── */
+.hero-photo {
+  background: linear-gradient(160deg, var(--s1) 0%, var(--s2) 58%, var(--s3) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cercle décoratif bas droite */
+.hero-photo::before {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -50px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 28px solid rgba(255,255,255,.05);
+}
+
+/* Cercle décoratif haut gauche */
+.hero-photo::after {
+  content: '';
+  position: absolute;
+  top: -30px; left: -30px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.06);
+}
+
+/* Cadre rond de la photo */
+.avatar-wrap {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  border: 3px solid rgba(255,255,255,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 46px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.2);
+  position: relative; z-index: 1;
+
+  /* Animation : pop en apparaissant */
+  animation: popUp .8s cubic-bezier(.34,1.56,.64,1) .5s both;
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: scale(.5) rotate(-10deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Nom sous la photo */
+.avatar-name {
+  text-align: center;
+  position: relative; z-index: 1;
+  animation: fadeSlide .7s ease .65s both;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.avatar-name strong {
+  display: block;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  letter-spacing: .3px;
+}
+
+.avatar-name span {
+  display: block;
+  font-size: .62rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  font-weight: 200;
+  margin-top: 4px;
+}
+
+
+/* ── Colonne 2 du hero : Grand titre ── */
+.hero-center {
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border-right: 1px solid var(--border);
+  background: var(--s7);
+  animation: slideX .8s cubic-bezier(.16,1,.3,1) .3s both;
+}
+
+@keyframes slideX {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Petit texte au dessus du titre */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .62rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--s3);
+  font-weight: 500;
+}
+
+/* Petite ligne avant le texte */
+.hero-eyebrow::before {
+  content: '';
+  width: 30px; height: 1.5px;
+  background: var(--s3);
+}
+
+/* Grand titre principal */
+.hero-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  color: var(--ink);
+  line-height: .95;
+  letter-spacing: -2px;
+}
+
+/* Mot en italique bleu */
+.hero-h1 em {
+  font-style: italic;
+  color: var(--s2);
+}
+
+/* Badge rôle */
+.hero-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .78rem;
+  color: var(--ink2);
+  font-weight: 300;
+  font-style: italic;
+  padding: 8px 16px;
+  background: var(--s6);
+  border: 1px solid var(--s5);
+  width: fit-content;
+}
+
+/* Point qui pulse avant le badge */
+.hero-role::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--s3);
+  flex-shrink: 0;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(63,168,213,.4); }
+  50%      { box-shadow: 0 0 0 5px rgba(63,168,213,0); }
+}
+
+
+/* ── Colonne 3 du hero : Contact ── */
+.hero-contact {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  background: var(--s6);
+  animation: slideX .8s cubic-bezier(.16,1,.3,1) .45s both;
+}
+
+/* Titre "Contact" */
+.contact-label {
+  font-size: .58rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--s3);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Ligne de contact */
+.cline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .77rem;
+  color: var(--ink2);
+  font-weight: 300;
+  transition: color .3s;
+}
+
+.cline:hover { color: var(--s1); }
+
+/* Icône carrée */
+.cbox {
+  width: 26px; height: 26px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem;
+  flex-shrink: 0;
+  transition: all .3s;
+}
+
+.cline:hover .cbox {
+  background: var(--s3);
+  border-color: var(--s3);
+}
+
+
+/* ============================================
+   BODY — zone du milieu avec 3 colonnes
+============================================ */
+.body {
+  display: grid;
+  grid-template-columns: 200px 1fr 220px;
+  min-height: 480px;
+}
+
+
+/* ── COLONNE GAUCHE : Compétences + Langues ── */
+.col-skills {
+  background: var(--s6);
+  border-right: 1px solid var(--border);
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Animation des blocs */
+.col-skills .blk { animation: fadeUp .7s ease both; }
+.col-skills .blk:nth-child(1) { animation-delay: .55s; }
+.col-skills .blk:nth-child(2) { animation-delay: .7s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Titre de bloc */
+.blk-title {
+  font-size: .58rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--s2);
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 7px;
+}
+
+.blk-title::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--border);
+}
+
+/* ── Barres de compétences ── */
+.skbar { margin-bottom: 13px; }
+
+.skbar-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: .73rem;
+  color: var(--ink2);
+  margin-bottom: 5px;
+}
+
+/* Fond gris de la barre */
+.skbar-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Barre bleue animée par le JS */
+.skbar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--s1), var(--s3));
+  border-radius: 10px;
+  width: 0; /* commence à 0%, JS met la bonne valeur */
+  transition: width 1.4s cubic-bezier(.4,0,.2,1);
+}
+
+/* ── Points de langue ── */
+.lang-item { margin-bottom: 13px; }
+
+.lang-name {
+  font-size: .73rem;
+  color: var(--ink2);
+  margin-bottom: 5px;
+}
+
+.lang-dots { display: flex; gap: 5px; }
+
+/* Point éteint */
+.ldot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+/* Point allumé */
+.ldot.on { background: var(--s3); }
+
+
+/* ── COLONNE CENTRE : Profil, Formation, Expériences ── */
+.col-main {
+  padding: 40px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  border-right: 1px solid var(--border);
+}
+
+.msec { animation: fadeUp .7s ease both; }
+.msec:nth-child(1) { animation-delay: .5s; }
+.msec:nth-child(2) { animation-delay: .65s; }
+.msec:nth-child(3) { animation-delay: .8s; }
+
+/* Ligne de titre de section */
+.msec-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Icône carrée bleue */
+.msec-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--s2), var(--s3));
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(26,122,170,.25);
+}
+
+/* Texte du titre */
+.msec-word {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+/* Ligne horizontale après le titre */
+.msec-rule {
+  flex: 1; height: 1px;
+  background: var(--border);
+}
+
+/* Texte du profil */
+.profil {
+  font-size: .88rem;
+  line-height: 1.82;
+  color: var(--ink2);
+  font-weight: 300;
+  padding: 18px 20px;
+  background: var(--s6);
+  border-left: 3px solid var(--s3);
+  font-style: italic;
+}
+
+/* ── Timeline ── */
+.tl { display: flex; flex-direction: column; }
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 18px;
+  padding-bottom: 26px;
+  position: relative;
+}
+
+/* Ligne verticale entre éléments */
+.tl-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 88px; top: 20px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--s5), transparent);
+}
+
+.tl-yr { text-align: right; padding-top: 2px; }
+
+.tl-yr strong {
+  font-family: 'DM Serif Display', serif;
+  font-size: .88rem;
+  color: var(--s2);
+  display: block;
+  line-height: 1.2;
+}
+
+.tl-yr span { font-size: .6rem; color: var(--muted); letter-spacing: .5px; }
+
+/* Point rond sur la timeline */
+.tl-dot {
+  position: absolute;
+  left: 82px; top: 4px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2.5px solid var(--s3);
+  box-shadow: 0 0 0 4px rgba(63,168,212,.12);
+  z-index: 1;
+}
+
+.tl-body h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: .95rem;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.tl-org {
+  font-size: .72rem;
+  color: var(--s2);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.tl-desc {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+
+/* ── COLONNE DROITE : Aptitudes + Réalisations ── */
+.col-right {
+  background: var(--s6);
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.col-right .blk { animation: fadeUp .7s ease both; }
+.col-right .blk:nth-child(1) { animation-delay: .6s; }
+.col-right .blk:nth-child(2) { animation-delay: .75s; }
+
+/* ── Tags aptitudes ── */
+.taglist { display: flex; flex-direction: column; gap: 7px; }
+
+.tpill {
+  font-size: .73rem;
+  color: var(--ink2);
+  font-weight: 300;
+  padding: 7px 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+  transition: all .3s;
+  cursor: default;
+}
+
+/* Point bleu avant chaque tag */
+.tpill::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--s4);
+  flex-shrink: 0;
+  transition: background .3s;
+}
+
+/* Glisse vers la droite au survol */
+.tpill:hover {
+  background: var(--s5);
+  border-color: var(--s3);
+  color: var(--s1);
+  transform: translateX(4px);
+}
+
+.tpill:hover::before { background: var(--s2); }
+
+/* ── Cartes Réalisations 2x2 ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.proj-card {
+  padding: 10px 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: 2.5px solid var(--s3);
+  transition: all .3s;
+}
+
+.proj-card:hover {
+  border-top-color: var(--s1);
+  box-shadow: 0 4px 16px rgba(63,168,212,.12);
+  transform: translateY(-2px);
+}
+
+.proj-em   { font-size: 1rem; margin-bottom: 4px; display: block; }
+.proj-name { font-family: 'DM Serif Display', serif; font-size: .65rem; color: var(--ink); margin-bottom: 2px; }
+.proj-sub  { font-size: .62rem; color: var(--muted); font-style: italic; }
+
+
+/* ============================================
+   FOOTER — barre tout en bas
+============================================ */
+.footer {
+  background: var(--s1);
+  padding: 16px 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-text {
+  font-size: .62rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+
+/* ── Barres d'onde animées ── */
+.footer-wave {
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.fw {
+  width: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.25);
+  animation: wave 1.2s ease infinite;
+}
+
+/* Hauteurs différentes */
+.fw:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.fw:nth-child(2) { height: 14px; animation-delay: .15s; }
+.fw:nth-child(3) { height: 10px; animation-delay: .3s; }
+.fw:nth-child(4) { height: 16px; animation-delay: .45s; }
+.fw:nth-child(5) { height: 8px;  animation-delay: .6s; }
+
+/* L'onde monte et descend */
+@keyframes wave {
+  0%,100% { transform: scaleY(1); }
+  50%      { transform: scaleY(.4); }
+}
+
+
+/* ============================================
+   RESPONSIVE — petit écran mobile
+============================================ */
+@media (max-width: 800px) {
+
+  body { padding: 0; }
+  .page { border-radius: 0; }
+
+  /* Hero en colonne verticale */
+  .hero { grid-template-columns: 1fr; }
+
+  .hero-photo {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .avatar-wrap { width: 70px; height: 70px; font-size: 32px; }
+
+  .hero-center {
+    padding: 24px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-h1 { font-size: 2rem; }
+  .hero-contact { padding: 24px; }
+
+  /* Body en colonne verticale */
+  .body { grid-template-columns: 1fr; }
+
+  .col-skills {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .col-main   { padding: 24px; border-right: none; }
+  .col-right  { padding: 24px; }
+
+  .tl-item { grid-template-columns: 65px 1fr; }
+  .tl-item:not(:last-child)::after { left: 73px; }
+  .tl-dot { left: 67px; }
+
+  .footer {
+    padding: 14px 24px;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
